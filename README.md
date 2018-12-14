@@ -4,20 +4,31 @@ Apigee OPDK Settings for Management Server
 This role updates the Ansible cache with attributes that are used to generate templates and make 
 installation decisions. 
 
+This role will add the following attributes to the Ansible cache: 
+* local_mgmt_ip
+* public_mgmt_ip
+
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role requires that the inventory group `[dc-1-ms]` be defined. If this role finds the inventory
+groups `[dc-1-ms]` and `[dc-2-ms]` then the necessary attributes will 
+be set so that replicated LDAP is properly configured between the two regions. 
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+| Name | Description |
+| --- | --- |
+| private_address | The `private_address` attribute should be set prior to using this role |
+| ms_port | Management server port |
+| [dc-1-ms] | Inventory group |
+| [dc-2-ms] | Inventory group, optional |
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+* apigee-opdk-setting-private-address
 
 Example Playbook
 ----------------
